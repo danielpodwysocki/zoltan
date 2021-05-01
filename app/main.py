@@ -2,6 +2,9 @@
 """Example bot that returns a synchronous response."""
 
 from flask import Flask, request, json
+from modules import help
+
+modules = [help]
 
 app = Flask(__name__)
 
@@ -14,8 +17,17 @@ def on_event():
         text = 'Thanks for adding me to "%s"!' % (event['space']['displayName'] if event['space']['displayName'] else 'this chat')
     elif event['type'] == 'MESSAGE':
         if 'slashCommand' in event['message']:
+            argument_text = None
+            if 'argumentText' in event['message']:
+                argument_text = event['message']['argumentText']
+
             command_id = event['message']['slashCommand']['commandId']
+            
             text = 'You used a slash command %s' %command_id
+            for m in modules:
+                if m.id == command_id:
+                    text = m.command() 
+
         else: 
             text = 'Hello, I am Zoltan, your chatbot helper. To learn about what I can do, type /help'
     else:
