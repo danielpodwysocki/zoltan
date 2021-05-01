@@ -19,7 +19,7 @@ def on_event():
         if 'slashCommand' in event['message']:
             argument_text = None
             if 'argumentText' in event['message']:
-                argument_text = event['message']['argumentText']
+                argument_text = event['message']['argumentText'].strip()
 
             command_id = event['message']['slashCommand']['commandId']
             
