@@ -16,7 +16,7 @@ def on_event():
   elif event['type'] == 'MESSAGE':
     text = 'You said: `%s`' % event['message']['text']
   else:
-    return
+    return json.jsonify({'text': 'test'})
   return json.jsonify({'text': text})
 
 
