@@ -9,7 +9,6 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def on_event():
-  return json.jsonify({'text': 'test'}) #for debugging
 
   """Handles an event from Google Chat."""
   event = request.get_json()
@@ -18,7 +17,7 @@ def on_event():
   elif event['type'] == 'MESSAGE':
     text = 'You said: `%s`' % event['message']['text']
   else:
-    return json.jsonify({'text': 'test'})
+    return
   return json.jsonify({'text': text})
 
 
