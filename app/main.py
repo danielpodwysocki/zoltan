@@ -9,6 +9,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def on_event():
+  return json.jsonify({'text': 'test'}) #for debugging
+
   """Handles an event from Google Chat."""
   event = request.get_json()
   if event['type'] == 'ADDED_TO_SPACE' and not event['space']['singleUserBotDm']:
