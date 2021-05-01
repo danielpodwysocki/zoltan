@@ -1,4 +1,4 @@
-class Help:
+class Handler:
     '''
         A slash command 
     '''
