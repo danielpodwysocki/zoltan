@@ -9,7 +9,7 @@ class Handler:
             /ssh [resource] [action] - a utility to check the availibility of hosts, run `/help ssh` to learn more"
 
         help_responses = {
-            "ssh": "Run `/ssh [machine's name] status` to see if the machine is reachable"
+            "ssh": "Run `/ssh [machine's name]` to see if the machine is reachable"
         }
         #if we have a help response for the passed arg, fill the response with it
         
