@@ -8,4 +8,4 @@ Roadmap:
 + Permissions system based on the email address, restricting access resources you act on.
 + Outgoing webhook support 
 
-Licensed under the MIT license. 
+This project exists under the MIT license. 
