@@ -25,7 +25,7 @@ def on_event():
             
             text = 'You used a slash command %s' %command_id
             for m in modules:
-                if m.Handler.id == command_id:
+                if str(m.Handler.id) == command_id:
                     text = m.Handler.command(argument_text) 
 
         else: 
