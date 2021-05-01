@@ -13,9 +13,10 @@ def on_event():
     if event['type'] == 'ADDED_TO_SPACE' and not event['space']['singleUserBotDm']:
         text = 'Thanks for adding me to "%s"!' % (event['space']['displayName'] if event['space']['displayName'] else 'this chat')
     elif event['type'] == 'MESSAGE':
-        if 'slashCommand' in event:
-            text = 'You used a slash command with an id of %s' % event['shlashCommand']['commandId']
-        else:
+        if 'slashCommand' in event['message']:
+            command_id = event['message']['slashCommand']['commandId']
+            text = 'You used a slash command %s' %command_id
+        else: 
             text = 'Hello, I am Zoltan, your chatbot helper. To learn about what I can do, type /help'
     else:
         return
