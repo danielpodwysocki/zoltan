@@ -2,9 +2,9 @@
 """Example bot that returns a synchronous response."""
 
 from flask import Flask, request, json
-from modules import help
+from modules import help, ssh
 
-modules = [help]
+modules = [help.Handler(), ssh.Handler('.')]
 
 app = Flask(__name__)
 
@@ -25,8 +25,8 @@ def on_event():
             
             text = 'You used a slash command %s' %command_id
             for m in modules:
-                if str(m.Handler.id) == command_id:
-                    text = m.Handler.command(argument_text)
+                if str(m.id) == command_id:
+                    text = m.command(argument_text)
 
         else:
             text = 'Hello, I am Zoltan, your chatbot helper. To learn about what I can do, type `/help`'
