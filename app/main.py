@@ -6,6 +6,12 @@ from modules import help, ssh
 
 modules = [help.Handler(), ssh.Handler('.')]
 
+#Values needed to verify where the request is coming from and if it's really Google
+CHAT_ISSUER = 'chat@system.gserviceaccount.com'
+PUBLIC_CERT_URL_PREFIX = 'https://www.googleapis.com/service_accounts/v1/metadata/x509/'
+AUDIENCE = "" #This needs to be set to the project number of the bot
+
+
 app = Flask(__name__)
 
 
