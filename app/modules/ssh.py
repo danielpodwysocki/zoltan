@@ -18,7 +18,7 @@ class Handler:
         if not message:
             response = "Run `/ssh [machine's name]` to see if the machine is reachable"
         elif bool(self.prog.match(message)):
-            response = "Checking `%s`" message
+            response = "Checking `%s`" % message
         else:
             response = "The machine's name is not in the correct format. Run `/help ssh` for command examples"
 
