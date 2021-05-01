@@ -12,7 +12,7 @@ class Handler:
         '''
         self.prog = re.compile(regexp)
 
-    def command(message):
+    def command(self, message):
         response = "Something went wrong :("
 
         if not message:
