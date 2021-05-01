@@ -26,10 +26,10 @@ def on_event():
             text = 'You used a slash command %s' %command_id
             for m in modules:
                 if str(m.Handler.id) == command_id:
-                    text = m.Handler.command(argument_text) 
+                    text = m.Handler.command(argument_text)
 
-        else: 
-            text = 'Hello, I am Zoltan, your chatbot helper. To learn about what I can do, type /help'
+        else:
+            text = 'Hello, I am Zoltan, your chatbot helper. To learn about what I can do, type `/help`'
     else:
         return
     return json.jsonify({'text': text})
