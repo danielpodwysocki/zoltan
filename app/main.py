@@ -2,20 +2,22 @@
 """Example bot that returns a synchronous response."""
 
 from flask import Flask, request, json
-
+from modules import help
 
 app = Flask(__name__)
 
 
 @app.route('/', methods=['POST'])
 def on_event():
-
     """Handles an event from Google Chat."""
     event = request.get_json()
     if event['type'] == 'ADDED_TO_SPACE' and not event['space']['singleUserBotDm']:
         text = 'Thanks for adding me to "%s"!' % (event['space']['displayName'] if event['space']['displayName'] else 'this chat')
     elif event['type'] == 'MESSAGE':
-        text = 'You said: `%s`' % event['message']['text']
+        if 'slashCommand' in event:
+            text = 'You used a slash command with an id of %s' % event['shlashCommand']['commandId']
+        else:
+            text = 'Hello, I am Zoltan, your chatbot helper. To learn about what I can do, type /help'
     else:
         return
     return json.jsonify({'text': text})
