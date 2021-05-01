@@ -13,9 +13,6 @@ class Handler:
         }
         #if we have a help response for the passed arg, fill the response with it
         
-        if message:
-            message = message.strip()
-        
-        if message in help_responses:
+        if message and message in help_responses:
             response = help_responses[message]
         return response
