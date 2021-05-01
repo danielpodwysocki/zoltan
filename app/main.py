@@ -2,7 +2,6 @@
 """Example bot that returns a synchronous response."""
 
 from flask import Flask, request, json
-from modules import help
 
 app = Flask(__name__)
 
@@ -24,4 +23,4 @@ def on_event():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
