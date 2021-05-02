@@ -1,16 +1,18 @@
 import re
+import paramiko
 
 class Handler:
     '''
     A slash command for checking ssh connectivity and rebooting machines.
     '''
     id = 2
-    def __init__(self, regexp):
+    def __init__(self, regexp, priv_key):
         '''
         Takes a regexp as an argument, the regexp will then be used to check if the format of the hostname is correct
 
         '''
         self.prog = re.compile(regexp)
+        self.priv_key = priv_key
 
     def command(self, message):
         response = "Something went wrong :("
