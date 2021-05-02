@@ -33,5 +33,6 @@ Slash command reference - if you're just setting the bot up, the most useful inf
 # Roadmap:
 + Permissions system based on the email address, restricting access to resources you act on.
 + Outgoing webhook support 
++ An API module that allows to define custom commands via a config file.
 
 This project exists under the MIT license. 
