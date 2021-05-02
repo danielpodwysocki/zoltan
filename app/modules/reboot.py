@@ -35,6 +35,6 @@ class Handler:
                 
             
         else:
-            response = "The machine's name is not in the correct format. Run `/help reboot` for command examples"
+            response = "The command is not in the correct format. Run `/help reboot` for command examples"
 
         return response

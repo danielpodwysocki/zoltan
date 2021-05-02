@@ -11,7 +11,7 @@ class Handler:
 
         help_responses = {
             "ssh": "Run `/ssh [machine's name]` to see if the machine is reachable",
-            "reboot": "Run `/reboot ['machine's name]` to reboot the machine"
+            "reboot": "Run `/reboot ['machine's name]` to reboot the machine, for example `/reboot machine1`"
         }
         #if we have a help response for the passed arg, fill the response with it
         
