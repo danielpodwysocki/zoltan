@@ -28,6 +28,7 @@ class Handler:
             try:
                 ssh.connect(message, key_filename="/ssh/zoltan", username='zoltan')
                 response = "The machine is reachable."
+                ssh.close()
             except Exception as e:
                 print(e)
                 response = "The machine is not reachable."
