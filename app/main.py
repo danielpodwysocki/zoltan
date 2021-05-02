@@ -33,10 +33,10 @@ def on_event():
     try:
         token = client.verify_id_token(bearer, AUDIENCE, cert_uri=PUBLIC_CERT_URL_PREFIX + CHAT_ISSUER)
         if token['iss'] != CHAT_ISSUER:
-            return jsonify({'message':'Failed'}), 401
+            return json.jsonify({'message':'Failed'}), 401
     except Exception as e:
         print(e)
-        return jsonify({'message':'Failed'}), 401
+        return json.jsonify({'message':'Failed'}), 401
 
     event = request.get_json()
     if event['type'] == 'ADDED_TO_SPACE' and not event['space']['singleUserBotDm']:
