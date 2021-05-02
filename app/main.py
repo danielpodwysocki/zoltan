@@ -5,8 +5,8 @@ from flask import Flask, request, json
 from modules import help, ssh
 from os import getenv
 
-HOST_REGEXP = os.getenv('HOST_REGEXP') #regexp against which all hosts for the ssh module are checked
-PROJECT_NUMBER = os.getenv('PROJECT_NUMBER')
+HOST_REGEXP = getenv('HOST_REGEXP') #regexp against which all hosts for the ssh module are checked
+PROJECT_NUMBER = getenv('PROJECT_NUMBER')
 
 
 modules = [help.Handler(), ssh.Handler(HOST_REGEXP)]
