@@ -1,0 +1,59 @@
+version: 3
+
+services:
+    traefik:
+        image: traefik:v2.4.6
+        container_name: traefik
+        volumes:
+          - etc_traefik:/etc/traefik
+          - /var/run/docker.sock:/var/run/docker.sock
+        labels:
+          - 'traefik.enable=true'
+          - 'traefik.http.routers.api.entrypoints=https'
+          - 'traefik.http.routers.api.service=api@internal'
+          - 'traefik.http.routers.api.tls=true'
+          - 'traefik.http.routers.api.tls.options=default'
+        ports:
+          - 80:80
+          - 443:443
+        command:
+            - '--api'
+            - '--providers.docker=true'
+            - '--providers.docker.exposedByDefault=false'
+            - '--providers.file.filename=/etc/traefik/certificates.yml'
+            - '--entrypoints.http=true'
+            - '--entrypoints.http.address=:80'
+            - '--entrypoints.http.http.redirections.entrypoint.to=https'
+            - '--entrypoints.http.http.redirections.entrypoint.scheme=https'
+            - '--entrypoints.https=true'
+            - '--entrypoints.https.address=:443'
+            - '--certificatesresolvers.myresolver.acme.email=admin@example.com'
+            - '--certificatesresolvers.myresolver.acme.storage=acme.json'
+            - '--certificatesresolvers.myresolver.acme.httpchallenge=true'
+            - '--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=http'
+            - '--log=true'
+            - '--log.level=DEBUG'
+            - '--log.filepath=/var/log/traefik.log'
+      
+    
+    zoltan:
+        image: dapo24/zoltan:latest
+        container_name: zoltan
+        restart: unless-stopped
+        environment:
+        - PROJECT_NUMBER=123456789 #Replace with your project number from Google cloud console
+        - HOST_REGEXP=. #Replace with a regexp to match against hostnames sent to your bot (ssh functionality only)
+        labels:
+            - 'traefik.http.routers.zoltan.rule=Host(`zoltan.example.com`)'
+            - 'traefik.enable=true'
+            - 'traefik.http.routers.zoltan.entrypoints=https'
+            - 'traefik.http.routers.zoltan.tls=true'
+            - 'traefik.http.routers.zoltan.tls.options=default'
+            - 'traefik.http.routers.zoltan.tls.certresolver=myresolver'
+        volumes:
+            - /srv/zoltan:/ssh
+
+
+volumes:
+    etc_traefik: {}
+          
