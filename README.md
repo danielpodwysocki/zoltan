@@ -2,7 +2,7 @@
 
 A modular self-service bot for Google chat.
 
-Currently in development.
+Currently in development. Already functional: connectivity check, rebooting a machine over ssh.
 
 # Setup
 
