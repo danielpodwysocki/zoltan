@@ -15,12 +15,25 @@ class Handler:
         self.priv_key = priv_key
 
     def command(self, message):
+
         response = "Something went wrong :("
 
         if not message:
             response = "Run `/ssh [machine's name]` to see if the machine is reachable"
         elif bool(self.prog.match(message)):
             response = "Checking `%s`" % message
+            ssh = paramiko.SSHClient(paramiko.WarningPolicy())
+            ssh.set_missing_host_key_policy(policy)
+            
+            #try connecting to the amchine specified by the message
+            try:
+                ssh.connect(message, pkey=self.priv_key, username='zoltan')
+                response = "The machine is reachable."
+            except Exception as e:
+                print(e)
+                response = "The machine is not reachable."
+                
+            
         else:
             response = "The machine's name is not in the correct format. Run `/help ssh` for command examples"
 
