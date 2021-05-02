@@ -22,8 +22,8 @@ class Handler:
             response = "Run `/ssh [machine's name]` to see if the machine is reachable"
         elif bool(self.prog.match(message)):
             response = "Checking `%s`" % message
-            ssh = paramiko.SSHClient(paramiko.WarningPolicy())
-            ssh.set_missing_host_key_policy(policy)
+            ssh = paramiko.SSHClient()
+            ssh.set_missing_host_key_policy(paramiko.WarningPolicy())
             
             #try connecting to the amchine specified by the message
             try:
