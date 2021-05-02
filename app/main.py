@@ -9,7 +9,7 @@ from oauth2client import client
 HOST_REGEXP = getenv('HOST_REGEXP') #regexp against which all hosts for the ssh module are checked
 PROJECT_NUMBER = getenv('PROJECT_NUMBER')
 
-modules = [help.Handler(), ssh.Handler(HOST_REGEXP), modules.Handler(HOST_REGEXP)]
+modules = [help.Handler(), ssh.Handler(HOST_REGEXP), reboot.Handler(HOST_REGEXP)]
 
 
 #Values needed to verify where the request is coming from and if it's really Google
