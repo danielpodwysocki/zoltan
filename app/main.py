@@ -32,7 +32,6 @@ def on_event():
     #Verify the OAuth2 token, to make sure the request is coming from Google
     try:
         token = client.verify_id_token(bearer, AUDIENCE, cert_uri=PUBLIC_CERT_URL_PREFIX + CHAT_ISSUER)
-        print("Audience: %s" % AUDIENCE)
         if token['iss'] != CHAT_ISSUER:
             return jsonify({'message':'Failed'}), 401
     except Exception as e:
