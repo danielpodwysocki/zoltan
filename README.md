@@ -6,7 +6,7 @@ Currently in development.
 
 # Setup
 
-In order to set the bot up, you need to point an A record from your domain to a machine, bring the bot up via the included docker-compose file and then make sure port 80 and 443 are exposed on it (so that Google can reach it). 
+In order to set the bot up, you need to point an A record from your domain to a machine, bring the bot up via the included docker-compose file and then make sure port 80 and 443 are exposed on it (so that Google can reach it, port 80 is for the ACME certificate). 
 
 Then follow this guide from Google in order to set your bot up:
 https://developers.google.com/hangouts/chat/how-tos/bots-publish
