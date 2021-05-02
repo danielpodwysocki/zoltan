@@ -20,8 +20,7 @@ Once you do, you need to add the slash commands in the Google Chat API console o
 | /ssh | 2| Checks the connectivity to a machine |
 | /reboot | 3 | Reboots a machine |
 
-Slash command reference - if you're just setting the bot up, the most useful information is at the bottom of the page: https://developers.google.com/hangouts/chat/how-tos/slash-commands#:~:text=Slash%20Commands%20enable%20you%20to,some%20of%20the%20bot's%20features.&text=When%20the%20user%20invokes%20your,message%20sent%20to%20your%20bot.
-
+Slash command reference - if you're just setting the bot up, the most useful information is at the bottom of the page: https://developers.google.com/hangouts/chat/how-tos/slash-commands
 
 # Roadmap:
 + Permissions system based on the email address, restricting access to resources you act on.
