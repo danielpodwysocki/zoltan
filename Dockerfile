@@ -4,5 +4,7 @@ ENV HOST_REGEXP .
 ENV PRIV_KEY 0
 ENV PROJECT_NUMBER default
 COPY ./requirements.txt /requirements.txt
+RUN mkdir /ssh
+RUN chmod 700 /ssh
 RUN pip install -r /requirements.txt
 COPY ./app /app
