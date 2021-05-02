@@ -3,8 +3,14 @@
 
 from flask import Flask, request, json
 from modules import help, ssh
+from os import getenv
 
-modules = [help.Handler(), ssh.Handler('.')]
+HOST_REGEXP = os.getenv('HOST_REGEXP') #regexp against which all hosts for the ssh module are checked
+PROJECT_NUMBER = os.getenv('PROJECT_NUMBER')
+
+
+modules = [help.Handler(), ssh.Handler(HOST_REGEXP)]
+
 
 #Values needed to verify where the request is coming from and if it's really Google
 CHAT_ISSUER = 'chat@system.gserviceaccount.com'
