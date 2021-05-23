@@ -6,13 +6,15 @@ from modules import help, ssh, reboot
 from os import getenv
 from oauth2client import client
 
-HOST_REGEXP = getenv('HOST_REGEXP') #regexp against which all hosts for the ssh module are checked
+# regexp against which all hosts for the ssh module are checked
+HOST_REGEXP = getenv('HOST_REGEXP')
 PROJECT_NUMBER = getenv('PROJECT_NUMBER')
 
-modules = [help.Handler(), ssh.Handler(HOST_REGEXP), reboot.Handler(HOST_REGEXP)]
+modules = [help.Handler(), ssh.Handler(HOST_REGEXP),
+           reboot.Handler(HOST_REGEXP)]
 
 
-#Values needed to verify where the request is coming from and if it's really Google
+# Values needed to verify where the request is coming from and if it's really Google
 CHAT_ISSUER = 'chat@system.gserviceaccount.com'
 PUBLIC_CERT_URL_PREFIX = 'https://www.googleapis.com/service_accounts/v1/metadata/x509/'
 AUDIENCE = PROJECT_NUMBER
@@ -28,18 +30,20 @@ def on_event():
     auth_header = request.headers.get('Authorization')
     bearer = auth_header.split("Bearer ")[1]
 
-    #Verify the OAuth2 token, to make sure the request is coming from Google
+    # Verify the OAuth2 token, to make sure the request is coming from Google
     try:
-        token = client.verify_id_token(bearer, AUDIENCE, cert_uri=PUBLIC_CERT_URL_PREFIX + CHAT_ISSUER)
+        token = client.verify_id_token(
+            bearer, AUDIENCE, cert_uri=PUBLIC_CERT_URL_PREFIX + CHAT_ISSUER)
         if token['iss'] != CHAT_ISSUER:
-            return json.jsonify({'message':'Failed'}), 401
+            return json.jsonify({'message': 'Failed'}), 401
     except Exception as e:
         print(e)
-        return json.jsonify({'message':'Failed'}), 401
+        return json.jsonify({'message': 'Failed'}), 401
 
     event = request.get_json()
     if event['type'] == 'ADDED_TO_SPACE' and not event['space']['singleUserBotDm']:
-        text = 'Thanks for adding me to "%s"!' % (event['space']['displayName'] if event['space']['displayName'] else 'this chat')
+        text = 'Thanks for adding me to "%s"!' % (
+            event['space']['displayName'] if event['space']['displayName'] else 'this chat')
     elif event['type'] == 'MESSAGE':
         if 'slashCommand' in event['message']:
             argument_text = None
@@ -47,8 +51,8 @@ def on_event():
                 argument_text = event['message']['argumentText'].strip()
 
             command_id = event['message']['slashCommand']['commandId']
-            
-            text = 'You used a slash command %s' %command_id
+
+            text = 'You used a slash command %s' % command_id
             for m in modules:
                 if str(m.id) == command_id:
                     text = m.command(argument_text)
